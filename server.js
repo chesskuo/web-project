@@ -1,17 +1,17 @@
 var express = require('express');
 var app = express();
 
-var login = require('./routers/login.js');
-var signup = require('./routers/signup.js');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 
 
 // main
-
 app.use(express.static('public'));
 
-app.use('/login', login);
-app.use('/signup', signup);
+app.use('/login', require('./routers/login.js'));
+app.use('/signup', require('./routers/signup.js'));
+app.use('/chat', require('./routers/chat.js')(io));
 
 app.use(function(req, res){
 	res.status(404).sendfile('public/404.html');
@@ -20,6 +20,6 @@ app.use(function(req, res){
 
 
 // server start
-app.listen(8888, function(){
+http.listen(8888, function(){
 	console.log('Listen on http://localhost:8888 ...');
 });
