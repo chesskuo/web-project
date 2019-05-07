@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-
-	<title>SignUp Page</title>
-	<meta charset="utf-8">
-
-</head>
+  <head>
+    <title>TLE Chat SignUp</title>
+    <meta charset = "utf-8">
+    <link href = "https://fonts.googleapis.com/css?family=Wendy+One" rel="stylesheet">
+    <link rel = "stylesheet" href = "style.css">
+  </head>
 
 <body>
 
-	<div style="text-align: center;">
-		<h1>Sign Up</h1>
+    <form action = "/login" class = "SignUp" method = "post" >
+        <div style = "border:0px; padding:5px; margin-top:100px; margin-left: 25%; "> 
+          <img src = "https://i.imgur.com/wl2yN5v.png"> 
+        </div>
 
-		<form action="/signup" method="post">
-			<p>使用者名稱: <input type="text" name="username"></p>
-			<p>姓名: <input type="text" name="name"></p>
-			<p>密碼: <input type="text" name="password"></p>
-			<p>E-Mail: <input type="text" name="email"></p>
-			<button type="submit">註冊</button>
-		</form>
-	</div>
+        <h1 style="margin-left: 25%;">User Name :</h1>
+            <input  id = "User"  type = "text"  placeholder = "Name"  name = "username"><br /><br />
+
+        <h1 style="margin-left: 25%;">User Password :</h1>
+            <input  id = "Password"  type = "password"  placeholder = "Password"  name= "password"><br /><br />
+
+        <h1 style="margin-left: 25%;">Chinese Name :</h1>
+            <input  id = "Name"  type = "text"  placeholder = "Chinese Name"  name= "name"><br /><br />
+
+        <h1 style="margin-left: 25%;">User Email :</h1>
+            <input  id = "Email"  type = "text"  placeholder = "Email"  name= "email"><br /><br />
+        
+        <button id = "Button" type = "submit">Sign</button>
+
+
+    </form>
+
 
 </body>
 </html>
