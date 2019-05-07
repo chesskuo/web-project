@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-
-	<title>Login Page</title>
-	<meta charset="utf-8">
-
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title>TLE Chat Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Wendy+One" rel="stylesheet">
+    <link rel = "stylesheet" href = "style.css">
+  </head>
 
 <body>
 
-	<div style="text-align: center;">
-		<h1>Login</h1>
+    <form action="/login" class="Login" method="post" >
+        <div style="border:0px ;padding:5px; margin-top: 100px;margin-left: 25%; "> 
+          <img src="https://i.imgur.com/wl2yN5v.png"> 
+        </div>
 
-		<form action="/login" method="post">
-			<p>帳號: <input type="text" name="account"></p>
-			<p>密碼: <input type="text" name="password"></p>
-			<button type="submit">登入</button>
-		</form>
-	</div>
+        <h1 style="margin-left: 25%;">User Name :</h1>
+            <input  id = "User"  type = "text"  placeholder = "Name"  name = "account"><br /><br />
+
+        <h1 style="margin-left: 25%;">User Password :</h1>
+            <input  id = "Password"  type = "password"  placeholder = "Password"  name= "password"><br /><br />
+
+        <button id = "Button" type = "submit">Login</button>
+
+    </form>
+
 
 </body>
 </html>
