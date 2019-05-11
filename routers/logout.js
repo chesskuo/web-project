@@ -23,26 +23,17 @@ router.use(session({
 	store: sessionStore,
 	resave: false,
 	saveUninitialized: false,
-	cookie: {maxAge: 24*60*60*1000}
+	cookie: {maxAge: 60*1000}
 }));
 
 
-module.exports = function(io){
-	router.route('/')
-		.get(function(req, res){
-			if(!req.session.name)
-				res.redirect('login');
-			else
-				res.sendfile('./public/chat.html');
-		})
 
-	io.on('connect', function(socket){
-		console.log('Connected!');
 
-		socket.on('disconnect', function(){
-			console.log('Disconnected!');
-		});
+// routing
+router.route('/')
+	.get(function(req, res){
+		req.session.destroy();
+		res.redirect('/login');
 	});
 
-	return router;
-};
+module.exports = router;

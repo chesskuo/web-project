@@ -10,6 +10,7 @@ var io = require('socket.io')(http);
 app.use(express.static('public'));
 
 app.use('/login', require('./routers/login.js'));
+app.use('/logout', require('./routers/logout.js'));
 app.use('/signup', require('./routers/signup.js'));
 app.use('/chat', require('./routers/chat.js')(io));
 

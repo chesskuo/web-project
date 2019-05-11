@@ -17,6 +17,23 @@ var pool  = mysql.createPool({
 	database        : 'chess'
 });
 
+// session
+var session = require('express-session')
+var MySQLStore = require('express-mysql-session')(session);
+var sessionStore = new MySQLStore({}, pool);
+
+router.use(session({
+	name: 'user',
+	secret: 'chesskuo',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false,
+	cookie: {maxAge: 24*60*60*1000}
+}));
+
+
+
+
 // routing
 router.route('/')
 	.get(function(req, res){
@@ -25,17 +42,24 @@ router.route('/')
 	.post(function(req, res){
 		if(req.body.account && req.body.password)
 		{
-			var query = "SELECT * FROM `user` WHERE username='" + req.body.account + "' AND password='" + req.body.password + "'";
+			var query = "SELECT username FROM `user` WHERE username='" + req.body.account + "' AND password='" + req.body.password + "'";
 
 			pool.query(query, function (error, results, fields) {
 				if(results[0])
-					res.send(results[0]);
+				{
+					req.session.name = results[0].username;
+					res.write('<script>location.href=\'/chat\';</script>');
+					res.end();
+				}
 				else
-					res.redirect('back');
+				{
+					res.write('<script>alert("帳號密碼錯誤");location.href=\'/login\';</script>');
+					res.end();
+				}
 			});
 		}
 		else
-			res.redirect('back');
+			res.redirect('/login');
 	});
 
 module.exports = router;
