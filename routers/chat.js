@@ -37,10 +37,10 @@ module.exports = function(io){
 		})
 
 	io.on('connect', function(socket){
-		console.log('Connected!');
+		// console.log('Connected!');
 
 		socket.on('disconnect', function(){
-			console.log('Disconnected!');
+			// console.log('Disconnected!');
 		});
 	});
 
