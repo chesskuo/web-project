@@ -25,8 +25,16 @@ router.route('/')
 	.post(function(req, res){
 		if(req.body.username && req.body.password && req.body.name && req.body.email)
 		{
+			var data = {
+				username: req.body.username,
+				password: req.body.password,
+				name: req.body.name,
+				email: req.body.email
+			};
+
 			pool.query('INSERT INTO `user` SET ?', data, function (error, results, fields) {
-				res.send('<script>alert("註冊成功!");location.href=\'/login\';</script>');
+				// console.log(results);
+				res.send('<script>alert("Success!");location.href=\'/login\';</script>');
 			});
 		}
 		else
