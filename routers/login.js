@@ -37,7 +37,10 @@ router.use(session({
 // routing
 router.route('/')
 	.get(function(req, res){
-		res.sendfile('./public/login.html');
+		if(!req.session.name)
+			res.sendfile('./public/login.html');
+		else
+			res.redirect('/chat');
 	})
 	.post(function(req, res){
 		if(req.body.account && req.body.password)

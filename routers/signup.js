@@ -20,7 +20,10 @@ var pool  = mysql.createPool({
 // routing
 router.route('/')
 	.get(function(req, res){
-		res.sendfile('./public/signup.html');
+		if(!req.session.name)
+			res.sendfile('./public/signup.html');
+		else
+			res.redirect('/chat');
 	})
 	.post(function(req, res){
 		if(req.body.username && req.body.password && req.body.name && req.body.email)
