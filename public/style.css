@@ -92,3 +92,19 @@
             margin-top: -1%; 
             margin-left: 43%;
       }
+      span{
+            font-weight:bold;
+            font-family:微軟正黑體;
+            font-size:25px; 
+            position: absolute;
+            top: 305px; 
+            left: 20%;
+      }
+      a{
+            font-weight:bold;
+            font-family:微軟正黑體;
+            font-size:20px; 
+            position: absolute;
+            top: 310px; 
+            margin-left: 27%;
+      }
