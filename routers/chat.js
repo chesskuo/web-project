@@ -27,6 +27,8 @@ router.use(session({
 }));
 
 
+
+// route
 module.exports = function(io){
 	router.route('/')
 		.get(function(req, res){

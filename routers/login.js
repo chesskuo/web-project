@@ -33,7 +33,6 @@ router.use(session({
 
 
 
-
 // routing
 router.route('/')
 	.get(function(req, res){

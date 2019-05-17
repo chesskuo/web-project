@@ -17,6 +17,22 @@ var pool  = mysql.createPool({
 	database        : 'chess'
 });
 
+// session
+var session = require('express-session')
+var MySQLStore = require('express-mysql-session')(session);
+var sessionStore = new MySQLStore({}, pool);
+
+router.use(session({
+	name: 'user',
+	secret: 'chesskuo',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false,
+	cookie: {maxAge: 24*60*60*1000}
+}));
+
+
+
 // routing
 router.route('/')
 	.get(function(req, res){
