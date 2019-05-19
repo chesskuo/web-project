@@ -28,6 +28,10 @@ router.use(session({
 
 
 
+
+let onlinecount = 0;
+var nickname;
+
 // route
 module.exports = function(io){
 	router.route('/')
@@ -35,16 +39,35 @@ module.exports = function(io){
 			if(!req.session.name)
 				res.redirect('login');
 			else
+			{
+				nickname = req.session.name;
 				res.sendfile('./public/chat.html');
+			}
 		})
 
-	io.on('connect', function(socket){
-		// console.log('Connected!');
-
-		socket.on('disconnect', function(){
-			// console.log('Disconnected!');
+		// socket
+		io.on('connection', (socket) => {
+	
+			onlinecount++;
+			io.emit("online" , "Online Users :" + onlinecount);
+			
+		
+			socket.on("greet", () => {
+				socket.emit("greet","Online Users: " + onlinecount);
+			});
+		
+			
+			socket.on("send",(msg) => {
+				//if(Object.keys(msg).length < 2) return;
+				io.emit("nickname",nickname);
+				io.emit("msg",msg);
+			});
+		
+			socket.on('disconnect', () => {
+				onlinecount = (onlinecount < 0) ? 0 : onlinecount -= 1;
+				io.emit("online","Online Users: " + onlinecount);
+			});
 		});
-	});
 
 	return router;
 };
