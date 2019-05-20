@@ -93,12 +93,12 @@
             margin-left: 43%;
       }
       span{
-            font-weight:bold;
+            position:absolute;
             font-family:微軟正黑體;
             font-size:25px; 
             position: absolute;
             top: 305px; 
-            left: 20%;
+            left: 350px;
       }
       a{
             font-weight:bold;
@@ -106,5 +106,5 @@
             font-size:20px; 
             position: absolute;
             top: 310px; 
-            margin-left: 27%;
+            margin-left: 500px;
       }
