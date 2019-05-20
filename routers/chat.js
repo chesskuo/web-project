@@ -30,7 +30,6 @@ router.use(session({
 
 // route
 module.exports = function(io){
-	let onlinecount = 0;
 
 	router.route('/')
 		.get(function(req, res){
@@ -43,29 +42,28 @@ module.exports = function(io){
 			}
 		})
 
+		
 		// socket
+		var names = [];
+
 		io.on('connection', (socket) => {
-	
-			onlinecount++;
-			io.emit("online" , "Online Users :" + onlinecount);
-			
-		
-			socket.on("greet", () => {
-				socket.emit("greet","Online Users: " + onlinecount);
+
+			socket.on('new user', function(data){
+				socket.username = data;
+				names.push(socket.username);
+				socket.emit('useradd', names);
+				updateUsername();
 			});
-		
-			
-			socket.on("send",(msg) => {
-				//if(Object.keys(msg).length < 2) return;
-				//io.emit("nickname",nickname);
-				io.emit("msg",msg);
-			});
-		
-			socket.on('disconnect', () => {
-				onlinecount = (onlinecount < 0) ? 0 : onlinecount -= 1;
-				io.emit("online","Online Users: " + onlinecount);
+
+			socket.on('disconnect', function(data){
+				names.splice(names.indexOf(socket.username), 1);
+				updateUsername();
 			});
 		});
+
+		function updateUsername(){
+			io.emit('useradd', names);
+		}
 
 	return router;
 };
