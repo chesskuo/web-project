@@ -32,6 +32,7 @@ router.use(session({
 router.route('/')
 	.get(function(req, res){
 		req.session.destroy();
+		res.clearCookie('username');
 		res.redirect('/login');
 	});
 

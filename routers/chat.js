@@ -28,19 +28,17 @@ router.use(session({
 
 
 
-
-let onlinecount = 0;
-var nickname;
-
 // route
 module.exports = function(io){
+	let onlinecount = 0;
+
 	router.route('/')
 		.get(function(req, res){
 			if(!req.session.name)
 				res.redirect('login');
 			else
 			{
-				nickname = req.session.name;
+				res.cookie('username', req.session.name, {maxAge: 60*60*1000});
 				res.sendfile('./public/chat.html');
 			}
 		})
@@ -59,7 +57,7 @@ module.exports = function(io){
 			
 			socket.on("send",(msg) => {
 				//if(Object.keys(msg).length < 2) return;
-				io.emit("nickname",nickname);
+				//io.emit("nickname",nickname);
 				io.emit("msg",msg);
 			});
 		
