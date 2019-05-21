@@ -39,7 +39,7 @@ html, body {
 
 .chatarea{
   width: 83%;
-  height: 85%;
+  height: 87%;
   position: fixed;
   top:0;
   left: 0;
@@ -48,12 +48,12 @@ html, body {
   background: #f0f7ff;
   color:black;
   display:block;
-  margin: 0 auto; 
+  margin: 0 auto;
+  margin-bottom: 3%;
   border:1px solid; 
   border-color:#d7e3e8;
   width:80%; 
   height:80%; 
-  height:95%; 
   resize:none; 
   font-family:Courier; 
   overflow-y:auto; 
@@ -62,7 +62,6 @@ html, body {
   font-weight: 800;
   padding: 0;
   margin-top:2%;
-  margin-top:3%;
 }
 .chatbox__user-list {
   width: 17%; 
@@ -72,8 +71,7 @@ html, body {
   border-bottom-right-radius: 0.2em;
   border:0;
   border-left-width: 1px;
-  border-style: solid; 
-  border-style: dashed; 
+  border-style: solid;  
   border-color: #d7e3e7;
 }
 .chatbox__user-list-top {
@@ -105,7 +103,7 @@ html, body {
   text-align: center;
   color: black;
   width:83%;
-  height:15%;
+  height:13%;
 }
 .chatbox_forinput input { 
   background-color:rgba(190 ,190 ,190,0.6);
@@ -148,4 +146,4 @@ textarea:focus{
 }
 input:focus{
   outline: none;
-
+}
