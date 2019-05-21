@@ -62,7 +62,6 @@ module.exports = function(io){
 
 			socket.on('new msg', function(data){
 				var msg = '<div class="messagecube">' + data.name + ' : ' + data.msg + '</div>';
-				// console.log(msg);
 				io.emit('send msg', msg);
 			});
 		});
