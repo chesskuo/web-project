@@ -76,7 +76,13 @@
 
 		// catch server's msg
 		socket.on('send msg', function(data){
-			$('#showarea').append(data);
+			var msgdata;
+
+			if(data.name == getCookie('username'))
+				msgdata = '<div class="messagecube-right">' + data.msg + '</div>';
+			else
+				msgdata = '<div class="messagecube-left">' + data.name + ' : ' + data.msg + '</div>';
+			$('#showarea').append(msgdata);
 			showarea.scrollTop= showarea.scrollHeight;
 		});
 
