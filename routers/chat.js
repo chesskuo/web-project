@@ -46,18 +46,24 @@ module.exports = function(io){
 		// socket
 		var names = [];
 
-		io.on('connection', (socket) => {
+		io.on('connection', function(socket){
 
 			socket.on('new user', function(data){
-				socket.username = data;
-				names.push(socket.username);
+				socket.name = data;
+				names.push(socket.name);
 				socket.emit('useradd', names);
 				updateUsername();
 			});
 
 			socket.on('disconnect', function(data){
-				names.splice(names.indexOf(socket.username), 1);
+				names.splice(names.indexOf(socket.name), 1);
 				updateUsername();
+			});
+
+			socket.on('new msg', function(data){
+				var msg = '<div class="messagecube">' + data.name + ' : ' + data.msg + '</div>';
+				// console.log(msg);
+				io.emit('send msg', msg);
 			});
 		});
 

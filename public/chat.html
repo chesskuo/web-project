@@ -45,10 +45,10 @@
 
 		socket.on('useradd', function(data){
 			var sb = '';
-			for(var i=0; i<data.length; i++){
-				console.log(data[i]);
-				sb += data[i] + "<br />";
-			}
+
+			for(var i=0; i<data.length; i++)
+				sb += data[i] + "<br>";
+
 			$('#userlist').html(sb);
 
 		});
@@ -71,8 +71,22 @@
 		{
 			code = (e.keyCode ? e.keyCode : e.which);
 			if (code == 13)
-				sendMessage();
+			{
+				var name = getCookie('username');
+				var msg = $('#input-area').val();
+
+				socket.emit('new msg', {name, msg});
+
+				$('#input-area').val('');
+				// sendMessage();
+			}
 		});
+
+		socket.on('send msg', function(data){
+			$('#showarea').append(data);
+			showarea.scrollTop= showarea.scrollHeight;
+		});
+
 		function sendMessage()
 		{
 			message = $('#input-area').val();
