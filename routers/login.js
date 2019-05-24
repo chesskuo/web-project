@@ -12,7 +12,7 @@ var pool  = mysql.createPool({
 	connectionLimit : 5,
 	host            : '140.136.150.68',
 	port            : '33066',
-	user            : 'root',
+	user            : 'chess',
 	password        : '880323',
 	database        : 'chess'
 });
@@ -50,12 +50,12 @@ router.route('/')
 				if(results[0])
 				{
 					req.session.name = results[0].username;
-					res.write('<script>location.href=\'/chat\';</script>');
+					res.write('<script>location.href="/chat";</script>');
 					res.end();
 				}
 				else
 				{
-					res.write('<script>alert("帳號密碼錯誤");location.href=\'/login\';</script>');
+					res.write('<script>alert("Wrong Username or Password!!!");location.href="/login";</script>');
 					res.end();
 				}
 			});

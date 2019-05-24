@@ -12,7 +12,7 @@ var pool  = mysql.createPool({
 	connectionLimit : 5,
 	host            : '140.136.150.68',
 	port            : '33066',
-	user            : 'root',
+	user            : 'chess',
 	password        : '880323',
 	database        : 'chess'
 });
@@ -44,20 +44,30 @@ router.route('/')
 	.post(function(req, res){
 		if(req.body.username && req.body.password && req.body.name && req.body.email)
 		{
-			var data = {
-				username: req.body.username,
-				password: req.body.password,
-				name: req.body.name,
-				email: req.body.email
-			};
-
-			pool.query('INSERT INTO `user` SET ?', data, function (error, results, fields) {
-				// console.log(results);
-				res.send('<script>alert("Success!");location.href=\'/login\';</script>');
+			var q = "SELECT * FROM `user` WHERE username='" + req.body.username + "' or email='" + req.body.email + "'";
+			pool.query(q, function(error, results){
+				if(results[0])
+				{
+					res.send('<script>alert("Username or Email is already used!");location.href="/signup";</script>');
+				}
+				else
+				{
+					var data = {
+						username: req.body.username,
+						password: req.body.password,
+						name: req.body.name,
+						email: req.body.email
+					};
+		
+					pool.query('INSERT INTO `user` SET ?', data, function (error, results, fields) {
+						// console.log(results);
+						res.send('<script>alert("Signup Success!");location.href="/login";</script>');
+					});
+				}
 			});
 		}
 		else
-			res.redirect('/signup');
+			res.send('<script>alert("Cannot be blank!!!");location.href="/signup";</script>');
 	});
 
 module.exports = router;

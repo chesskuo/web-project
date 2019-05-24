@@ -19,22 +19,22 @@
 	<div class='chatbox'>
 		<div class='chatbox__user-list'>
 			<div class='chatbox__user-list-top'>
-				<p>
-					Members
-				</p>
-			</div>
-			<div class='chatbox__user-list-bottom' id="userlist">
-				
+				<p>Members</p>
 			</div>
 
+			<div class='chatbox__user-list-bottom' id="userlist"></div>
 		</div>
+
 		<div class="chatarea">
 			<div class="infor_bar">
-				<form action="/logout" method="get"><button id="log_out">Log out</button></form>
+				<form action="/logout" method="get">
+					<button id="log_out">Log out</button>
+				</form>
 			</div>
-			<div id="showarea">
-			</div>
-		</div> 
+
+			<div id="showarea"></div>
+		</div>
+
 		<div class='chatbox_forinput'>
 			<input type="text" id="input-area" placeholder="Type message">
 		</div>
@@ -63,14 +63,14 @@
 		// send msg to server
 		$("#input-area").keypress(function(e){
 			code = (e.keyCode ? e.keyCode : e.which);
+
 			if (code == 13){
 				var name = getCookie('username');
 				var msg = $('#input-area').val();
 
 				socket.emit('new msg', {name, msg});
-
+				
 				$('#input-area').val('');
-				// sendMessage();
 			}
 		});
 
@@ -82,19 +82,23 @@
 				msgdata = '<div class="messagecube-right">' + data.msg + '</div>';
 			else
 				msgdata = '<br>' + data.name + ':<br><div class="messagecube-left">' + data.msg + '</div>';
+
 			$('#showarea').append(msgdata);
+
 			showarea.scrollTop= showarea.scrollHeight;
 		});
 
 		function getCookie(cname){
 			var name = cname + "=";
 			var ca = document.cookie.split(';');
-			for(var i=0; i<ca.length; i++)
-			{
+
+			for(var i=0; i<ca.length; i++){
 				var c = ca[i].trim();
+
 				if (c.indexOf(name)==0)
 					return c.substring(name.length,c.length);
 			}
+
 			return "";
 		}
 
