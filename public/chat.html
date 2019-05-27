@@ -64,7 +64,7 @@
 		$("#input-area").keypress(function(e){
 			code = (e.keyCode ? e.keyCode : e.which);
 
-			if (code == 13){
+			if (code == 13 && $('#input-area').val() != ''){
 				var name = getCookie('username');
 				var msg = $('#input-area').val();
 
