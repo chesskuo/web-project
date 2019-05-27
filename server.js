@@ -14,6 +14,10 @@ app.use('/logout', require('./routers/logout.js'));
 app.use('/signup', require('./routers/signup.js'));
 app.use('/chat', require('./routers/chat.js')(io));
 
+app.get('/', function(req, res){
+	res.redirect('/login');
+});
+
 app.use(function(req, res){
 	res.status(404).sendfile('public/404.html');
 });
